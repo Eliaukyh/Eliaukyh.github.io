@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>SocialLGN,Light graph convolution network for social recommendation</title>
+    <link href="/2022/11/06/SocialLGN/"/>
+    <url>/2022/11/06/SocialLGN/</url>
+    
+    <content type="html"><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>本文提出了社交推荐的两个重大挑战</p><ul><li>如何精确的从交互图和社交图中学习用户和物品的嵌入向量。</li><li>因为用户同时被两个图所影响，如何聚合两个图的信息也是一个巨大挑战。</li></ul><p>据此，本文提出了<strong>SocialLGN</strong>模型，每个用户和物品的特征通过 lightGCN层在交互图的传播，同时，用户的特征也在社交图中传播，我们还设计了一种图融合操作，用于聚合用户的嵌入向量。</p><span id="more"></span><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>用户物品交互图和社交网络图通常被当作两个图来对待（用户物品交互图和社交图），目前有两个方式将图中的用户信息聚合起来：</p><ul><li>一是将两图融合进一个新的异质图；</li><li>二是分别在两个图中学习用户的嵌入向量，在将结果聚合起来，如图1；</li></ul><p><img src="SocialLGN/%E5%88%86%E5%BC%80.png" title="图1 分别学习再聚合"></p><p>这篇论文提出了一个叫<strong>SocialLGN</strong>的基于LightGCN新模型，创新性的利用LightGCN的传播机制融合了两个图的信息，丰富了用户和物品的表示向量。因为用户嵌入向量分别在两个图进行传播，故我们还提出一种新的图融合模型，嵌入到SocialLGN中，他将两个图中的用户嵌入向量聚合起来，丰富了用户嵌入向量的信息。</p><p>主要贡献如下：</p><ul><li>拓展了LightGCN模型，让他可以在社交推荐系统中更加如鱼得水；</li><li>设计了一个新的图融合组件，可以将从两个图中学习到的用户表示向量聚合起来，该组件使用了一个正则化操作，可以防止图卷积层层数增长导致的用户表示向量规模的大幅增长；</li><li>说自己效果杠杠的。</li></ul><h2 id="Design-of-SocialLGN"><a href="#Design-of-SocialLGN" class="headerlink" title="Design of SocialLGN"></a>Design of SocialLGN</h2><h3 id="模型结构"><a href="#模型结构" class="headerlink" title="模型结构"></a>模型结构</h3><p>主要由3个部分组成：</p><ul><li>一个Embedding层，由用户和物品的IDs，对他们的embedding向量进行初始化</li><li>多个Propagation层，将用户和物品的embedding向量在交互图和社交图中进行传播</li><li>一个预测层，通过最终的embedding向量，对图中任意一条边的值进行预测</li></ul><p>下面展示具体的工作机制。</p><h3 id="Embedding-层"><a href="#Embedding-层" class="headerlink" title="Embedding 层"></a>Embedding 层</h3><p>pass</p><h3 id="Propagation-层"><a href="#Propagation-层" class="headerlink" title="Propagation 层"></a>Propagation 层</h3><p><img src="SocialLGN/SocialLGN.png" title="图2 模型结构"></p><p>在第 $k$ 个propagation层中，从$k-1$层获取embedding向量，然后输出更新后的embedding向量。<br>$$<br>\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}<br>$$<br>对于用户$u$来说，我们同时使用两个图对其进行更新，并从$k-1$层将其输出（表示为${e}^{(k-1)}<em>u$），做完以后得到从交互图和社交图的用户向量分别为${q}^{(k)}</em>{u}$和${p}^{(k)}<em>u$:<br>$$<br>{q}^{(k)}</em>{u}=\sum_{i\in N_u^I} \frac{1}{\sqrt{N^I_u} \sqrt{N^I_i}}{e}^{(k-1)}_i<br>$$</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>图推荐</category>
+      
+      <category>社交推荐</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>GNN</tag>
+      
+      <tag>recommandation</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>第二篇博客</title>
     <link href="/2022/11/05/%E7%AC%AC%E4%BA%8C%E7%AF%87%E5%8D%9A%E5%AE%A2/"/>
     <url>/2022/11/05/%E7%AC%AC%E4%BA%8C%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
