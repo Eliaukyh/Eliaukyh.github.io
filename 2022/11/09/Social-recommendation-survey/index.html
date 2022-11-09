@@ -16,26 +16,23 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Abstract本文提出了社交推荐的两个重大挑战  如何精确的从交互图和社交图中学习用户和物品的嵌入向量。 因为用户同时被两个图所影响，如何聚合两个图的信息也是一个巨大挑战。  据此，本文提出了SocialLGN模型，每个用户和物品的特征通过 lightGCN层在交互图的传播，同时，用户的特征也在社交图中传播，我们还设计了一种图融合操作，用于聚合用户的嵌入向量。">
+    <meta name="description" content="这是图神经网络在社交推荐当中的一个简短的综述。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SocialLGN,Light graph convolution network for social recommendation">
-<meta property="og:url" content="http://example.com/2022/11/06/SocialLGN/index.html">
+<meta property="og:title" content="Social Recommendation Survey">
+<meta property="og:url" content="http://example.com/2022/11/09/Social-recommendation-survey/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Abstract本文提出了社交推荐的两个重大挑战  如何精确的从交互图和社交图中学习用户和物品的嵌入向量。 因为用户同时被两个图所影响，如何聚合两个图的信息也是一个巨大挑战。  据此，本文提出了SocialLGN模型，每个用户和物品的特征通过 lightGCN层在交互图的传播，同时，用户的特征也在社交图中传播，我们还设计了一种图融合操作，用于聚合用户的嵌入向量。">
+<meta property="og:description" content="这是图神经网络在社交推荐当中的一个简短的综述。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2022/11/06/SocialLGN/SocialLGN/%E5%88%86%E5%BC%80.png">
-<meta property="og:image" content="http://example.com/2022/11/06/SocialLGN/SocialLGN/SocialLGN.png">
-<meta property="article:published_time" content="2022-11-06T08:47:50.000Z">
-<meta property="article:modified_time" content="2022-11-06T12:01:32.253Z">
+<meta property="article:published_time" content="2022-11-09T15:47:20.000Z">
+<meta property="article:modified_time" content="2022-11-09T16:05:08.791Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="GNN">
 <meta property="article:tag" content="recommandation">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/2022/11/06/SocialLGN/SocialLGN/%E5%88%86%E5%BC%80.png">
   
   
   
-  <title>SocialLGN,Light graph convolution network for social recommendation - Hexo</title>
+  <title>Social Recommendation Survey - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +197,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="SocialLGN,Light graph convolution network for social recommendation"></span>
+            <span id="subtitle" data-typed-text="Social Recommendation Survey"></span>
           
         </div>
 
@@ -211,8 +208,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-11-06 16:47" pubdate>
-          2022年11月6日 下午
+        <time datetime="2022-11-09 23:47" pubdate>
+          2022年11月9日 晚上
         </time>
       </span>
     
@@ -223,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          6.3k 字
         
       </span>
     
@@ -234,7 +231,7 @@
         
         
         
-          9 分钟
+          53 分钟
         
       </span>
     
@@ -272,42 +269,35 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">SocialLGN,Light graph convolution network for social recommendation</h1>
+            <h1 style="display: none">Social Recommendation Survey</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>本文提出了社交推荐的两个重大挑战</p>
-<ul>
-<li>如何精确的从交互图和社交图中学习用户和物品的嵌入向量。</li>
-<li>因为用户同时被两个图所影响，如何聚合两个图的信息也是一个巨大挑战。</li>
-</ul>
-<p>据此，本文提出了<strong>SocialLGN</strong>模型，每个用户和物品的特征通过 lightGCN层在交互图的传播，同时，用户的特征也在社交图中传播，我们还设计了一种图融合操作，用于聚合用户的嵌入向量。</p>
+                <p>这是图神经网络在社交推荐当中的一个简短的综述。</p>
 <span id="more"></span>
 
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>用户物品交互图和社交网络图通常被当作两个图来对待（用户物品交互图和社交图），目前有两个方式将图中的用户信息聚合起来：</p>
+<h2 id="1-SOCIAL-RECOMMENDATION"><a href="#1-SOCIAL-RECOMMENDATION" class="headerlink" title="1 SOCIAL RECOMMENDATION"></a>1 SOCIAL RECOMMENDATION</h2><p>With the emergence of online social networks, social recommender systems have been proposed to utilize each user’s local neighbors’ preferences to enhance user modeling [43, 65, 103, 104, 172]. All these works assume users with social relationships should have similar representations based on the social influence theory that connected people would influence each other. Some of them directly use such relationship as regularizer to constraint the final user representations [65, 104, 105, 138], while others leverage such relationship as input to enhance the original user embeddings [43, 103]. </p>
+<p>From the perspective of graph learning, the early works mentioned above can be seen as modeling the first-order neighbors of each user. However, in practice, a user might be influenced by her/his friends’ friends. Overlooking the high-order influence diffusion in previous works might lead to the suboptimal recommendation performance [172]. Thanks to the ability of simulating how users are influenced by the recursive social diffusion process, GNN has become a popular choice to model the social information in recommendation.</p>
+<p>To incorporate relationships among users into interaction behaviors by leveraging GNN, there are two main issues to deal with:</p>
 <ul>
-<li>一是将两图融合进一个新的异质图；</li>
-<li>二是分别在两个图中学习用户的嵌入向量，在将结果聚合起来，如图1；</li>
+<li><strong>Influence of Friends.</strong> Do friends have equal influence? If not, how to distinguish the influence of different friends?</li>
+<li><strong>Preference Integration.</strong> Users are involved in two types of relationships, i.e., social relationships with their friends and interactions with items. How to integrate the user representations from the social influence perspective and interaction behavior?</li>
 </ul>
-<p><img src="SocialLGN/%E5%88%86%E5%BC%80.png" srcset="/img/loading.gif" lazyload title="图1 分别学习再聚合"></p>
-<p>这篇论文提出了一个叫<strong>SocialLGN</strong>的基于LightGCN新模型，创新性的利用LightGCN的传播机制融合了两个图的信息，丰富了用户和物品的表示向量。因为用户嵌入向量分别在两个图进行传播，故我们还提出一种新的图融合模型，嵌入到SocialLGN中，他将两个图中的用户嵌入向量聚合起来，丰富了用户嵌入向量的信息。</p>
-<p>主要贡献如下：</p>
+<h3 id="1-1-Influence-of-friends"><a href="#1-1-Influence-of-friends" class="headerlink" title="1.1 Influence of friends"></a>1.1 Influence of friends</h3><p>Generally, a social graph only contains information about whether the users are friends, but the strengths of social ties are usually unknown. To propagate the information of friends, it is essential to decide the influence of friends. DiffNet [172] treats the influence of friends equally by leveraging mean-pooling operation. However, the assumption of equal influence is not in accordance with the actual situation, and the influence of a user is unsuitable to be simply determined by the number of her/his friends. Indeed, users are more likely to be influenced by friends with strong social ties or similar preferences. Therefore, attention mechanism is widely leveraged to differentiate the influence of neighbors [2, 33, 110, 130, 171, 174]. For example, Song et al. [130] propose DGRec, which dynamically infers the influence of neighbors based on their current interests. It first modelsdynamic users’ behaviors with a recurrent neural network, and then acquires the social influence with a graph-attention neural network. Compared to the mean-pooling operation, the attention mechanism boosts the overall performance, which further verifies the assumption that different friends have different influence power.</p>
+<p>Moreover, a recent work, named ESRF [191], argues that social relations are not always reliable. The unreliability of social information lies in two aspects: on the one hand, the users with explicit social connections might have no influence power; on the other hand, the obtained social relationships might be incomplete. Considering that indiscriminately incorporating unreliable social relationships into recommendation may lead to poor performance, ESRP leverages the autoencoder mechanism to modify the observed social relationships by filtering irrelevant relationships and investigating the new neighbors. Similarly, DiffNetLG [129] involves implicit local influence to predict the unobserved social relationship and then utilizes both explicit and implicit social relations to make recommendations.</p>
+<h3 id="1-2-Preference-Integration"><a href="#1-2-Preference-Integration" class="headerlink" title="1.2 Preference Integration"></a>1.2 Preference Integration</h3><p>Users in social recommendatioin are involved in two types of relationships, one is the user-item interactions and the other is the social graph. To enhance the user preference representation by leveraging social information, there are two strategies for combining the information from these two networks,</p>
 <ul>
-<li>拓展了LightGCN模型，让他可以在社交推荐系统中更加如鱼得水；</li>
-<li>设计了一个新的图融合组件，可以将从两个图中学习到的用户表示向量聚合起来，该组件使用了一个正则化操作，可以防止图卷积层层数增长导致的用户表示向量规模的大幅增长；</li>
-<li>说自己效果杠杠的。</li>
+<li>to learn the user representation from these two networks respectively [33, 172, 174] and then integrate them into the final preference vector, as illustrated in Figure 7a;</li>
+<li>to combine the two networks into one unified network [171] and apply GNN to propagate information, as illustrated in Figure 7b.</li>
 </ul>
-<h2 id="Design-of-SocialLGN"><a href="#Design-of-SocialLGN" class="headerlink" title="Design of SocialLGN"></a>Design of SocialLGN</h2><h3 id="模型结构"><a href="#模型结构" class="headerlink" title="模型结构"></a>模型结构</h3><p>主要由3个部分组成：</p>
+<p>The advantage of the first strategy lies in two aspects: on the one hand, we can differentiate the depth of diffusion process of two networks since they are treated separately; on the other hand, any advanced method for user-item bipartite graph can be directly applied, and for social network, a homogeneous graph, GNN techniques are extremely suitable for simulating the influence process since they are originally proposed for homogeneous graphs. As for the integration of the user representations learned from two relationships, there are two main mechanisms, i.e., linearity combination and non-linearity combination. Among the linearity combination, DiffNet [172] treats the user representations from two spaces equally, and combines them with a sum-pooling operation. Instead of an equal-weight combination, DANSER [174] dynamically allocates weights according to the user-item paired features. Among the non-linearity combination, multi-layer perceptrons over the concatenated vector are widely adopted to enhance the feature interactions [33, 47, 186].</p>
+<p>The advantage of integrating the two graphs into one unified network is that both the higherorder social influence diffusion in the social network and interest diffusion in the user-item bipartite graph can be simulated in a unified model, and these two kinds of information simultaneously reflect users’ preferences. DiffNet++ [171] designs a two-level attention network to update user nodes at each layer. Specifically, it firstly aggregates the information of neighbors in the bipartite graph (i.e., interacted items) and social network (i.e., friends) by utilizing the GAT mechanism respectively. Considering that different users may have different preferences in balancing these two relationships, it further leverages another attention network to fuse the two hidden states of neighbors. Similarly, SEFrame [20] utilizes a heterogeneous graph network to fuse the knowledge from social relationships, user-item interactions and item transitions from the heterogeneous graph, and employs a two-level attention network for propagation. Up till now, there is no evidence to show which strategy always achieves better performance.</p>
+<h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h3><p>Corresponding to the discussion at the beginning of this section, we briefly summarize the current<br>works in terms of the two issues:</p>
 <ul>
-<li>一个Embedding层，由用户和物品的IDs，对他们的embedding向量进行初始化</li>
-<li>多个Propagation层，将用户和物品的embedding向量在交互图和社交图中进行传播</li>
-<li>一个预测层，通过最终的embedding向量，对图中任意一条边的值进行预测</li>
+<li><strong>Influence of Friends.</strong> Compared to assigning equal weights to friends, differentiating the influence of different friends is more appropriate. An emerging direction is to automatically modify the social relationship, which can benefit from the presence of noise in social networks.</li>
+<li><strong>Preference Integration.</strong> The strategies for combining the two sources of information depends on whether to consider the two graphs separately or unify them into one graph. For the separate graphs, user preference is an integration of the overall representations learned from these two graphs. For the unified graph, a commonly adopted strategy is the hierarchical aggregation schema.</li>
 </ul>
-<p>下面展示具体的工作机制。</p>
-<h3 id="Embedding-层"><a href="#Embedding-层" class="headerlink" title="Embedding 层"></a>Embedding 层</h3><p>pass</p>
-<h3 id="Propagation-层"><a href="#Propagation-层" class="headerlink" title="Propagation 层"></a>Propagation 层</h3><p><img src="SocialLGN/SocialLGN.png" srcset="/img/loading.gif" lazyload title="图2 模型结构"></p>
-<p>在第 $k$ 个propagation层中，从$k-1$层获取embedding向量，然后输出更新后的embedding向量。<br>$$<br>\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}<br>$$<br>对于用户$u$来说，我们同时使用两个图对其进行更新，并从$k-1$层将其输出（表示为${e}^{(k-1)}<em>u$），做完以后得到从交互图和社交图的用户向量分别为${q}^{(k)}</em>{u}$和${p}^{(k)}<em>u$:<br>$$<br>{q}^{(k)}</em>{u}=\sum_{i\in N_u^I} \frac{1}{\sqrt{N^I_u} \sqrt{N^I_i}}{e}^{(k-1)}_i<br>$$</p>
 
                 
               </div>
@@ -362,8 +352,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>SocialLGN,Light graph convolution network for social recommendation</div>
-      <div>http://example.com/2022/11/06/SocialLGN/</div>
+      <div>Social Recommendation Survey</div>
+      <div>http://example.com/2022/11/09/Social-recommendation-survey/</div>
     </div>
     <div class="license-meta">
       
@@ -375,7 +365,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年11月6日</div>
+          <div>2022年11月9日</div>
         </div>
       
       
@@ -407,18 +397,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/11/09/Social-recommendation-survey/" title="Social Recommendation Survey">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Social Recommendation Survey</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/11/05/%E7%AC%AC%E4%BA%8C%E7%AF%87%E5%8D%9A%E5%AE%A2/" title="第二篇博客">
-                        <span class="hidden-mobile">第二篇博客</span>
+                      <a href="/2022/11/06/SocialLGN/" title="SocialLGN,Light graph convolution network for social recommendation">
+                        <span class="hidden-mobile">SocialLGN,Light graph convolution network for social recommendation</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
